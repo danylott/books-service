@@ -5,6 +5,10 @@ Microservices-based pet project
 
 ![Requirements](requirements.png)
 
+## Architecture:
+
+![Architecture](architecture.png)
+
 ## Resources:
 
 1. Book:
@@ -37,7 +41,8 @@ Microservices-based pet project
    2. SQLite database for Books
    3. API: 
       1. POST:       books/ - add new
-      2. GET:        books/ - get list of books
+      2. GET:        books/ - get list of books (do we need it?)
+      2. GET:        books/<id>/ - get book's detail info
       3. PUT/PATCH:  books/<id>/ - update book (also manage inventory)
       4. DELETE:     books/<id>/ - delete book
 2. User service:
@@ -58,14 +63,14 @@ Microservices-based pet project
       2. GET:        borrowings/?user_id=<int> - get borrowings by user id
       3. POST:       borrowings/<id>/return/ - set actual return date
 4. Notifications (not in MVP):
-   1. Sending notifications to users about expected return date coming
-   2. No DB required
-   3. No API required
-   4. Interacting with other services periodically
+   1. Notifications about new books added, book returned...
+   3. No DB required
+   4. Asynchronous, we will use Queue for it.
+   5. Other services interact with it to send notifications to user
 5. Payments (not in MVP):
    1. Performing annual payments for books borrowings through the platform
    2. NoSQL DB for Payments
-   3. Not decided if API is required yet
+   3. Asynchronous, used by other services, also Queue
    4. Interacting with other services periodically
 6. View (Delegate to another person maybe):
    1. Front-end interface for communication with Library

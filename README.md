@@ -67,3 +67,5 @@ Microservices-based pet project
    2. NoSQL DB for Payments
    3. Not decided if API is required yet
    4. Interacting with other services periodically
+6. View (Delegate to another person maybe):
+   1. Front-end interface for communication with Library

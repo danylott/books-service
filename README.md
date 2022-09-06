@@ -36,16 +36,16 @@ Microservices-based pet project
 
 ## Components:
 
-1. Books Inventory:
+1. Books service:
    1. Managing books amount (CRUD for Books)
    2. SQLite database for Books
    3. API: 
       1. POST:       books/ - add new
       2. GET:        books/ - get list of books (do we need it?)
-      2. GET:        books/<id>/ - get book's detail info
-      3. PUT/PATCH:  books/<id>/ - update book (also manage inventory)
-      4. DELETE:     books/<id>/ - delete book
-2. User service:
+      2. GET:        books/`<id>`/ - get book's detail info
+      3. PUT/PATCH:  books/`<id>`/ - update book (also manage inventory)
+      4. DELETE:     books/`<id>`/ - delete book
+2. Users service:
    1. Managing authentication & user registration
    2. SQLite database for Users
    3. API:
@@ -55,19 +55,19 @@ Microservices-based pet project
       4. GET:        users/me/ - get my profile info
       5. PUT/PATCH:  users/me/ - update profile info
       6. GET:        users/me/books/ - get my borrowed books
-3. Borrowing service:
+3. Borrowings service:
    1. Managing users borrowings of books
    2. SQL/NoSQL database for Borrowings
    3. API:
       1. POST:       borrowings/ - add new borrowing
       2. GET:        borrowings/?user_id=<int> - get borrowings by user id
-      3. POST:       borrowings/<id>/return/ - set actual return date
-4. Notifications (not in MVP):
+      3. POST:       borrowings/`<id>`/return/ - set actual return date
+4. Notifications service (not in MVP):
    1. Notifications about new books added, book returned...
    3. No DB required
    4. Asynchronous, we will use Queue for it.
    5. Other services interact with it to send notifications to user
-5. Payments (not in MVP):
+5. Payments service (not in MVP):
    1. Performing annual payments for books borrowings through the platform
    2. NoSQL DB for Payments
    3. Asynchronous, used by other services, also Queue

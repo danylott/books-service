@@ -10,8 +10,9 @@ class Book(models.Model):
     author = models.CharField(max_length=63)
     cover = models.CharField(max_length=4, choices=CoverChoices.choices)
     inventory = models.PositiveIntegerField(default=0)
-    monthly_annual_fee = models.DecimalField("Monthly annual fee in $USD", max_digits=7, decimal_places=2)
+    monthly_annual_fee = models.DecimalField(
+        "Monthly annual fee in $USD", max_digits=7, decimal_places=2
+    )
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.title} - {self.author}"
-

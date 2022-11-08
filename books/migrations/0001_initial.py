@@ -27,7 +27,8 @@ class Migration(migrations.Migration):
                 (
                     "cover",
                     models.CharField(
-                        choices=[("HARD", "Hard"), ("SOFT", "Soft")], max_length=4
+                        choices=[("HARD", "Hard"), ("SOFT", "Soft")],
+                        max_length=4,
                     ),
                 ),
                 ("inventory", models.PositiveIntegerField(default=0)),

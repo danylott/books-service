@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
-
+from datetime import timedelta
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -20,7 +20,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-9kr3h*&6ibjm+b$gl9cjh9_%u9b$1p$1=ymj@-6xzd$=qw0)*@"
+SECRET_KEY = (
+    "django-insecure-9kr3h*&6ibjm+b$gl9cjh9_%u9b$1p$1=ymj@-6xzd$=qw0)*@"
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -39,6 +41,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "drf_spectacular",
+    "rest_framework_simplejwt",
+    "users",
     "books",
 ]
 
@@ -140,4 +144,15 @@ SPECTACULAR_SETTINGS = {
 
 REST_FRAMEWORK = {
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ),
 }
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),  # default = 5 min
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=7),  # default = 1 day
+    "ROTATE_REFRESH_TOKENS": True,  # will return also new refresh token
+}
+
+AUTH_USER_MODEL = "users.User"

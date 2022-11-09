@@ -16,7 +16,7 @@ Microservices-based pet project
    2. Author: str
    3. Cover: Enum: HARD | SOFT
    4. Inventory: int
-   5. Monthly annual fee: decimal (in $USD)
+   5. daily annual fee: decimal (in $USD)
 2. User (Customer):
    1. Username: str
    2. First name: str

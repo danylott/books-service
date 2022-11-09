@@ -59,10 +59,10 @@ Microservices-based pet project
    1. Managing users borrowings of books
    2. SQL/NoSQL database for Borrowings
    3. API:
-      1. POST:       borrowings/ - add new borrowing
+      1. POST:       borrowings/ - add new borrowing (when borrow book - inventory should be made -= 1)
       2. GET:        borrowings/?user_id=<int> - get borrowings by user id
       3. GET:        borrowings/`<id>`/ - get specific borrowing
-      4. POST:       borrowings/`<id>`/return/ - set actual return date
+      4. POST:       borrowings/`<id>`/return/ - set actual return date (inventory should be made += 1)
 4. Notifications service (not in MVP):
    1. Notifications about new books added, book returned...
    3. No DB required

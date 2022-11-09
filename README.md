@@ -61,7 +61,8 @@ Microservices-based pet project
    3. API:
       1. POST:       borrowings/ - add new borrowing
       2. GET:        borrowings/?user_id=<int> - get borrowings by user id
-      3. POST:       borrowings/`<id>`/return/ - set actual return date
+      3. GET:        borrowings/`<id>`/ - get specific borrowing
+      4. POST:       borrowings/`<id>`/return/ - set actual return date
 4. Notifications service (not in MVP):
    1. Notifications about new books added, book returned...
    3. No DB required

@@ -148,8 +148,9 @@ REST_FRAMEWORK = {
     ),
 }
 
+# TODO: fix token lifetime to 30 minutes
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),  # default = 5 min
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=3),  # default = 5 min
     "REFRESH_TOKEN_LIFETIME": timedelta(days=7),  # default = 1 day
     "ROTATE_REFRESH_TOKENS": True,  # will return also new refresh token
 }

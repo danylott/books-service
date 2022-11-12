@@ -12,6 +12,9 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 
 from borrowings.models import Borrowing
 from borrowings.serializers import BorrowingSerializer, BorrowingReadSerializer
+from notifications.telegram import send_telegram_notification
+from payments.models import Payment
+from payments.views import create_stripe_payment
 
 
 class BorrowingViewSet(
@@ -26,7 +29,7 @@ class BorrowingViewSet(
     permission_classes = (IsAuthenticated,)
 
     def get_queryset(self) -> QuerySet:
-        queryset = self.queryset
+        queryset = super().get_queryset()
 
         is_active = self.request.query_params.get("is_active", None)
 
@@ -48,11 +51,15 @@ class BorrowingViewSet(
 
         return super().get_serializer_class()
 
+    def get_serializer_context(self) -> dict:
+        context = super().get_serializer_context()
+        context.update({"request": self.request})
+        return context
+
     @action(
         detail=True, methods=["POST"], url_path="return", serializer_class=Serializer
     )
     def return_borrowing(self, request: Request, pk: int = None) -> Response:
-        # TODO: add logic, if actual_return_date > expected_return_date when payment system will be ready.
         borrowing = self.get_object()
         if borrowing.actual_return_date is not None:
             return Response(
@@ -61,6 +68,10 @@ class BorrowingViewSet(
             )
 
         borrowing.actual_return_date = date.today()
+
+        if borrowing.actual_return_date > borrowing.expected_return_date:
+            create_stripe_payment(request, borrowing, Payment.TypeChoices.FINE)
+
         borrowing.book.inventory += 1
         borrowing.save()
         borrowing.book.save()

@@ -20,7 +20,6 @@ def dict_to_readable_str(dict_to_convert: dict) -> str:
     return "; ".join(f"{key}: {value}" for key, value in dict_to_convert.items())
 
 
-# TODO: add possibility to recreate stripe session
 def create_stripe_payment(
     request: Request,
     borrowing: Borrowing,

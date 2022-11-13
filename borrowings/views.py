@@ -12,7 +12,6 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 
 from borrowings.models import Borrowing
 from borrowings.serializers import BorrowingSerializer, BorrowingReadSerializer
-from notifications.telegram import send_telegram_notification
 from payments.models import Payment
 from payments.views import create_stripe_payment
 

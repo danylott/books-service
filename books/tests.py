@@ -43,3 +43,25 @@ class PublicBooksApiTests(TestCase):
 
         response = self.client.post(BOOK_URL, payload)
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+        
+        class PrivateBookApiTests(TestCase):
+    def setUp(self):
+        self.user = create_user(
+            email="test@test.com",
+            password="testpass",
+        )
+        self.client = APIClient()
+        self.client.force_authenticate(user=self.user)
+
+    def test_list_books(self):
+        sample_books()
+
+        response = self.client.get(BOOK_URL)
+
+        books = Book.objects.all()
+        serializer = BookSerializer(books, many=True)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data, serializer.data)
+

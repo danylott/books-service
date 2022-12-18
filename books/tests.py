@@ -65,3 +65,13 @@ class PublicBooksApiTests(TestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data, serializer.data)
 
+def test_post_books(self):
+        payload = {
+            "title": "Sample book",
+            "author": "Sample author",
+            "inventory": 10,
+            "daily_annual_fee": 1.00,
+        }
+
+        response = self.client.post(BOOK_URL, payload)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)

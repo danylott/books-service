@@ -75,3 +75,32 @@ def test_post_books(self):
 
         response = self.client.post(BOOK_URL, payload)
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+class AdminBookApiTests(TestCase):
+    def setUp(self):
+        self.user = create_user(
+            email="test@test.com",
+            password="testpass",
+            is_staff=True,
+        )
+        self.client = APIClient()
+        self.client.force_authenticate(user=self.user)
+
+    def test_post_books(self):
+        payload = {
+            "title": "Sample book",
+            "author": "Sample author",
+            "inventory": 10,
+            "daily_annual_fee": 1.00,
+            "cover": "HARD",
+        }
+
+        response = self.client.post(BOOK_URL, payload)
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+    def test_retrieve_book(self):
+        sample_books()
+
+        response = self.client.get(f"{BOOK_URL}1/")
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)

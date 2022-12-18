@@ -104,3 +104,16 @@ class AdminBookApiTests(TestCase):
         response = self.client.get(f"{BOOK_URL}1/")
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+def test_put_book(self):
+        sample_books()
+
+        response = self.client.put(f"{BOOK_URL}1/", {})
+
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_delete_book(self):
+        sample_books()
+
+        response = self.client.delete(f"{BOOK_URL}1/")
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
